@@ -2,22 +2,8 @@
 
 require('database.php');
 
-//Create new user
-if($_GET["show"] == "all") {
-    try{
-        $statement = $pdo->prepare(
-            'SELECT * FROM users;'
-        );
-        $statement->execute();
 
-        $results = $statement->fetchAll(PDO::FETCH_OBJ);
-        echo "Read from table users</br>";
-    } catch(PDOException $e){
-        echo "<h4 style='color: red;'>".$e->getMessage(). "</h4>";
-    }
-}
-
-if($_GET["show"] == "one" && isset($_GET["id"])) {
+if(isset($_GET["show"]) && isset($_GET["id"])) {
     $id = $_GET["id"];
     try{
         $statement = $pdo->prepare(
@@ -26,10 +12,13 @@ if($_GET["show"] == "one" && isset($_GET["id"])) {
         $statement->execute(["id" => $id]);
 
         $results = $statement->fetchAll(PDO::FETCH_OBJ);
-        echo "Read from table users</br>";
+        //echo "Read from table users</br>";
     } catch(PDOException $e){
         echo "<h4 style='color: red;'>".$e->getMessage(). "</h4>";
     }
+}else{
+    echo "<script>location.href='/'</script>";
+    die();
 }
 
 ?>
@@ -62,5 +51,7 @@ if($_GET["show"] == "one" && isset($_GET["id"])) {
                 </td>
             </tr>
     <?php } ?>
+    </table>
+        <a href="/">Go Back</a>
     </body>
 </html>

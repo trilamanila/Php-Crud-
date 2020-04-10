@@ -50,6 +50,6 @@ if(isset($_GET["id"])){
             <input type="text" name="age" value="<?php echo $results[0]->age; ?>"><br>
             <button type="submit">Save</button>
         </form>
-        <a href="/read.php?show=all">Go Back</a>
+        <a href="/">Go Back</a>
     </body>
 </html>
